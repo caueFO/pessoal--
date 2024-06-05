@@ -1,0 +1,162 @@
+body{
+
+padding: auto;
+margin: auto;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #376FC0;
+background-attachment: fixed;
+box-sizing: border-box;
+}
+
+.banner .container img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.header{
+    
+    background-color: rgba(251, 255, 3, 0);
+    justify-content: space-between;
+}
+
+.header .container{
+   
+justify-content: space-between;
+margin: 0;
+width: 100%;
+background-color: #fff;
+}
+
+.navbar{
+    list-style: none;
+    padding: 0;
+    width: 81%;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+}
+
+.navbar a{
+    text-decoration: none;
+        font-weight: 1000;
+    color: #bba712;
+    
+}
+
+.titulo {
+    color: #32b9cd;
+    width: fit-content;
+    font-weight: 500;
+}
+
+a{
+color: rgb(255, 255, 255);
+}
+
+
+.agora{
+    font-weight: 1000;
+    color: rgba(247, 103, 7, 0.966);
+
+}
+.container2{
+display: flex;
+justify-content: space-around;
+flex-direction: row;
+align-items: center;
+
+
+}
+
+.banner {
+    height: 500px;
+    color: #000000;
+    display: flex;
+}
+.banner .container2{
+    align-items: center;
+    justify-content: space-around;
+}
+
+.box{
+    color: #ffd900;
+    width: 683px;
+    height: 720px;
+    background-color: #0000005e;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 59px;
+    margin-bottom: 115px;
+    border-radius: 10px;
+    justify-content: space-evenly;
+}
+.box span {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 5px 0;
+}
+
+.campo span {
+    font-size: 15px;
+    font-weight: 800;
+}
+.botao{
+    display: flex;
+    border: 2px solid #32b9cd;
+    background-color: white;
+    color: gray;
+    height: 36px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0;
+    width: 391px;
+}
+
+.botao2{
+    cursor: pointer;
+    font-family: "Barlow", sans-serif;
+    border: 0;
+    border-radius: 19px;
+    font-size: 18px;
+    color: #000000bf;
+    background-color: #ffd900;
+    width: 152px;
+    height: 40px;
+    font-size: 18px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.footer{
+background-color: #bba712;
+height: 100px;
+width: 100%;
+color: #fff;
+display: flex;
+font-size: 15px;
+}
+
+.footer .container{
+    flex-direction: row;
+align-items: center;
+text-align: center;
+justify-content: center;
+}

@@ -1,0 +1,550 @@
+body{
+padding: auto;
+margin: auto;
+font-family: sans-serif;
+background-color: #78B5E1;
+background-attachment: fixed;
+box-sizing: border-box;
+}
+html{
+    height: 500vh;
+}
+
+
+.container {
+    display: flex;
+    margin: auto;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+justify-content: space-between;
+margin:  auto;
+width: 100%;
+transition: 1.5s;
+z-index: 1000;
+}
+
+.header .container{
+    width: 100%;
+}
+
+.header.rolagem{
+    background-color: #ffffff;
+    padding-bottom: 4px;
+    padding-top: 10px;
+
+}
+
+.header.rolagem a{
+    color: #bba712;
+
+}
+
+.navbar{
+    list-style: none;
+    padding: 0;
+    width: 81%;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+margin-left: auto;
+}
+
+.navbar a{
+    
+        font-weight: 1000;
+    color: rgba(255, 255, 255, 0.966);  
+    text-decoration: none; 
+    position: relative;
+    padding-right: 20px;
+    
+}
+.navbar a::after{
+    content: url(imagens/15144975-de-contorno-de-cor-de-icone-de-simbolo-de-raio-vetor-removebg-preview.png) ;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.7s ;
+
+}
+.navbar a:hover::after {
+    opacity: 1;
+}
+
+
+
+.agora{
+    font-weight: 1000;
+    color: rgba(234, 255, 0, 0.966);
+    
+}
+
+
+
+.box{
+    color: #ffd900;
+    width: 683px;
+    height: 676px;
+    background-color: #0000005e;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 59px;
+    margin-bottom: 115px;
+    border-radius: 10px;
+    justify-content: space-evenly;
+}
+.box span {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 5px 0;
+}
+
+.campo span {
+    font-size: 15px;
+    font-weight: 800;
+}
+.botao{
+    display: flex;
+    border: 2px solid #32b9cd;
+    background-color: white;
+    color: gray;
+    height: 36px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0;
+    width: 391px;
+}
+
+.botao2{
+    cursor: pointer;
+    font-family: "Barlow", sans-serif;
+    border: 0;
+    border-radius: 19px;
+    font-size: 18px;
+    color: #000000bf;
+    background-color: #ffd900;
+    width: 152px;
+    height: 40px;
+    font-size: 18px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.footer{
+    background-color: #e5da10;
+height: 150px;
+width: 101%;
+color: #fff;
+display: flex;
+font-size: 15px;
+}
+
+.footer .container{
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+/*imagem inazuma */
+
+.banner1 .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;    
+}
+
+.banner1 .container img {
+    width: 40%;
+    margin-bottom: 10%;
+}
+
+/*  O que é Super Onze / video */
+
+
+.oqueé {
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10%;
+    color: #bba712;
+    width: 100%;
+font-size: 20;
+    font-weight: 500;
+    background-color: #fff;
+}
+
+.info{
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    background-image: url(imagens/pao\ \(1\).png)w;
+}
+
+.info .caixavideo {
+    width: 67%;
+    height: 800x;
+    margin: 2%;
+    border: #0168C5 solid 8px;
+border-radius: 30px ;
+background-color: #FBA737;
+}
+
+.info .texto1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+.info img{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.info .texto1 h1{
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif ;
+}
+.info .texto1 h2{
+    color: #ffffff;
+}
+.info .texto1 h3{
+    color: black;
+}
+
+.info .caixavideo video{
+    border-radius: 30px;
+}
+
+.info img{
+    margin: 5%;
+    width: 29%;
+  }
+
+/* Tela dos filmes e series */
+
+.series{
+    display: flex;
+    justify-content: space-between;
+}
+.quadrado1 {
+    display: flex;
+    width: 50px;
+    height: 50px;
+}
+.quadrado2{
+    display: flex;
+
+    width: 50px;
+    height: 50px;
+}
+/* Tela para ir ao jogo */
+.info2 {
+    display: flex;
+    background-image: url(imagens/dedrk24-e9371fee-aad3-409a-93e2-3fd046342fa2.png);
+    background-size: 100% ;
+    background-repeat: no-repeat;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.info2 .titulogrande{
+    margin-top: 15px;
+}
+.info2 .titulogrande h1{
+    display: flex;
+    margin: 10px;
+    padding: 0%;
+    color: white;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 30px;
+}
+
+.info2 .botoes{
+    display: flex;
+        align-items: center;
+    height: 324px;
+    justify-content: center;
+}
+
+.info2 .botoes button{
+    width: 500px;
+    height: 50px;
+    color: white;
+    border: white solid 5px;
+    background-color: #0168C5;
+    
+}
+
+
+.info2 .botoes img{
+
+    height: 150px;
+}
+
+.info2 .titulogrande1 h1{
+    display: flex;
+    margin-bottom: 100px;
+    padding: 0%;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}/* 1° Carrossel */
+
+.jogadores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+font-size: 30px;
+color: white;
+z-index: 0;
+}
+.carrossel1{
+    height: 389px;
+    margin: auto ;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+   overflow: hidden;
+    position: relative;
+    z-index: 999;
+    }
+   
+    .carrossel-inner1{
+       display: flex;
+       width: calc(250px * 84);
+   animation: scroll 150s linear infinite;
+    }
+   
+    .carrossel-inner1:hover{
+       animation-play-state: paused;
+    }
+   
+    @keyframes scroll {
+       0%{
+           transform: translateX(0);
+       }
+       100%{
+        transform: translateX(calc(-250px * 42));
+       }
+    }
+   
+    .perso1{
+       height: 200px;
+       width: 250px;
+       display: flex;
+       align-items: center;
+       margin-top: 100px;
+       margin-left: 50px;
+       perspective: 100px;
+    }
+   
+    .perso1 img{
+       width: 100%;
+       transition: 1s;
+    }
+   .perso1 img:hover{
+       transform: translateZ(20px);
+       z-index: 0;
+   }
+   
+
+
+
+ /* Carrossel com os personagens */
+
+ .carrossel{
+ height: 500px;
+ margin: auto;
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ overflow:hidden;
+ position: relative;
+ z-index: 999;
+ }
+
+ .carrossel-inner{
+    display: flex;
+    width: calc(250px * 84);
+animation: scroll 150s linear infinite reverse;
+ }
+
+ .carrossel-inner:hover{
+    animation-play-state: paused;
+ }
+
+ @keyframes scroll {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translate(calc(-250px * 42));
+    }
+ }
+
+ .perso{
+    height: 200px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+    margin-left: 50px;
+    perspective: 100px;
+    z-index: 999;
+
+ }
+
+ .perso img{
+    width: 100%;
+    transition: 1s;
+ }
+.perso img:hover{
+    transform: translateZ(20px);
+    z-index: 999;
+}
+
+/* slider com as series */
+
+.slider {
+    margin: 0 auto;
+    width: 800px;
+    height: 489px;
+    position: relative;
+}
+
+.slides {
+    width: calc(800px * 7);  
+    height: 489px;
+    display: flex;
+    transition: margin-left 0.5s;
+}
+
+.slides input {
+    display: none;
+}
+
+.slide {
+    width: 800px; 
+    flex-shrink: 0;
+    transition: 3s;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.manual-navigation {
+    width: 800px;
+    bottom: 10px; 
+    display: flex;
+    justify-content: center;
+}
+
+.manual-btn {
+    border: 3px solid white;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.manual-btn:not(:last-child) {
+    margin-right: 40px;
+}
+
+.manual-btn:hover {
+    background-color: #ffffff;
+}
+
+#radio1:checked ~ .first {
+    margin-left: 0;
+}
+#radio2:checked ~ .first {
+    margin-left: -800px;
+}
+#radio3:checked ~ .first {
+    margin-left: -1600px;
+}
+#radio4:checked ~ .first {
+    margin-left: -2400px;
+}
+#radio5:checked ~ .first {
+    margin-left: -3200px;
+}
+#radio6:checked ~ .first {
+    margin-left: -4000px;
+}
+#radio7:checked ~ .first {
+    margin-left: -4800px;
+}
+
+.navigation-auto div{
+    border: 3px solid yellow;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.navigation-auto{
+    position: absolute;
+    width: calc(800px * 7);
+    margin-top: 360px;
+    display: flex;
+    justify-content: center;
+}
+
+.navigation-auto div:not(:last-child){
+    margin-right: 40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1 {
+    background-color: white;
+}
+#radio2:checked ~ .navigation-auto .auto-btn2 {
+    background-color: white;
+}
+#radio3:checked ~ .navigation-auto .auto-btn3 {
+    background-color: white;
+}
+#radio4:checked ~ .navigation-auto .auto-btn4 {
+    background-color: white;
+}
+#radio5:checked ~ .navigation-auto .auto-btn5 {
+    background-color: white;
+}
+#radio6:checked ~ .navigation-auto .auto-btn6 {
+    background-color: white;
+}
+#radio7:checked ~ .navigation-auto .auto-btn7 {
+    background-color: white;
+}

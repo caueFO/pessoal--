@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style1.css">
+    <title>Cadastro</title>
+</head>
+<body background="assets/imagens/zp-99298_Inazuma-Eleven-Ares_2016_07-27-16_001.jpg">
+
+    <div class="header">
+        <div class="container">
+             <img src="assets/imagens/kisspng-inazuma-eleven-go-killua-zoldyck-emblem-logo-embraimon-2-inazuma-eleven-go-5b744e79076328.5285403015343489210303.png" alt="" width="100px" height="100px">
+            <ul class="navbar">
+                <li>
+                    <a href="index.html">Página Inicial</a>
+                </li>
+                <li>
+                    <a href="">Mundo Inazuma</a>
+                </li>
+                <li>
+                    <a href="">Ranking</a>
+                </li>
+            
+                <li>
+                    <a href="login inazuma.html">Login</a>
+                </li>
+                   <li>
+                       <a href="cadastro inazuma.html" class="agora">Cadastro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+   <div id="banner">
+    <div class="container2">
+        <div class="box">
+            <h1>Bem vindo!</h1>
+            <div class="campo">
+                <span>Nome Completo:</span>
+                <input class="botao" type="text" id="input_nomecomp" placeholder="Nome completo aqui"><br>
+                <div id="div_mensagem1" class="campo1"></div>
+            </div>
+            <div class="campo">
+                <span>Nome de Usuário:</span>
+                <input class="botao" type="text" id="input_nomeusua" placeholder="Seu nome de Usuário"><br>
+                <div id="div_mensagem2" class="campo1"></div>
+            </div>
+            <div class="campo">
+                <span>E-mail:</span>
+                <input class="botao" type="text" id="input_email" placeholder="Seu E-mail aqui"><br>
+                <div id="div_mensagem3" class="campo1"></div>
+            </div>
+            <div class="campo">
+                <span>Senha:</span>
+                <input class="botao" type="password" id="input_senha" placeholder="*******"><br>
+                <div id="div_mensagem4" class="campo1"></div>
+            </div>
+            <div class="campo">
+                <span>Confirme sua senha:</span>
+                <input class="botao" type="password" id="input_confsenha" placeholder="********"><br>
+                <div id="div_mensagem5" class="campo1"></div> <div id="div_mensagem6"></div>
+            </div>
+            <div class="campo">
+                <span> Escolha seu personagem </span>
+                <select class="botao" name="selecionarPersonagem" id="listaPersonagem">
+                    <option selected disabled value="0">Selecionar um personagem</option>
+                   </select>
+            </div>
+            <button class="botao2" onclick="cadastrar()">Cadastrar</button>
+        </div>
+    </div>
+    </div>
+    <div id="cardErro" style="display: none;">
+        <div id="mensagem_erro"></div>
+    </div>
+    <div class="footer">
+        <div class="container">
+          <h4>Feito por Shalomm@</h4>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+    
+</body>
+</html>
+
+<script>
+    function aguardar() {
+        // This function would show a loading indicator
+        console.log("Aguardando...");
+    }
+
+    function finalizarAguardar() {
+        // This function would hide the loading indicator
+        console.log("Finalizar aguardando...");
+    }
+
+    function cadastrar() {
+        aguardar();
+
+        var nomeVar = input_nomecomp.value;
+        var usuarioVar = input_nomeusua.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+        var confirmacaoSenhaVar = input_confsenha.value;
+        var personagemVar = listaPersonagem.value
+
+        if (
+            nomeVar == "" ||
+            usuarioVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == "",
+            personagemVar == ""
+        ) {
+            document.getElementById("cardErro").style.display = "block";
+            document.getElementById("mensagem_erro").innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            finalizarAguardar();
+            return false;
+        } else {
+            setInterval(sumirMensagem, 5000);
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                usuarioServer: usuarioVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                personagemServer: personagemVar
+            }),
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                document.getElementById("cardErro").style.display = "block";
+
+                document.getElementById("mensagem_erro").innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login inazuma.html";
+                }, 2000);
+
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function listar() {
+      fetch("/personagens/listar", {
+        method: "GET",
+      })
+        .then(function (resposta) {
+          return resposta.json();
+        })
+        .then(function (personagens) {
+          var listaPersonagem = document.getElementById('listaPersonagem');
+          personagens.forEach((personagem) => {
+            listaPersonagem.innerHTML += `<option value='${personagem.idPersonagem}'>${personagem.nome}</option>`;
+          });
+        })
+        .catch(function (erro) {
+          console.log(`#ERRO: ${erro}`);
+        });
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        listar();})
+</script>
