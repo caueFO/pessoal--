@@ -22,7 +22,7 @@ function verificarTentativas(idUsuario, tipoQuiz) {
 
 function listarTentativas(idUsuario, tipoQuiz) {
     const instrucaoSql = `
-        SELECT qtPontos, tempo
+        SELECT qtPontos, tempo, tentativa
         FROM quiz join usuario on fkUsuario = idUsuario
         WHERE idUsuario = ${idUsuario} AND tipoQuiz = '${tipoQuiz}';
     `;
