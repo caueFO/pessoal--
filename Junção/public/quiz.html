@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você conhece Super Onze</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .quiz {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .opcoes button {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 10px auto;
+        }
+
+        .pontuacao, .finalizacao, #resposta {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="quiz" class="quiz">
+        <div id="inicio">
+            <h1>Perguntas Sobre Super Onze</h1>
+            <button onclick="iniciar()">Iniciar Quiz</button>
+            <div class="pontuacao" id="pontuacao"></div>
+        </div>
+        
+        <div>
+            <div class="pergunta" id="pergunta" style="display: none;"></div>
+            <div id="opcoes" class="opcoes" style="display: none;">
+                <button class="opcoes" id="opcao1" onclick="analisar(0)"></button>
+                <button class="opcoes" id="opcao2" onclick="analisar(1)"></button>
+                <button class="opcoes" id="opcao3" onclick="analisar(2)"></button>
+                <button class="opcoes" id="opcao4" onclick="analisar(3)"></button>
+            </div>
+        </div>
+        <div class="finalizacao" id="finalizacao"></div>
+        <div id="resposta"></div>
+    </div>
+
+    <script>
+        var perguntasQuiz = [
+            {
+                perguntas: "Quem é este personagem?",
+                opcoes: ["hiroto", "Tsurugi", "Goenji", "Tenma"],
+                respostas: '2',
+            },
+            {
+                perguntas: "Quem é este personagem?",
+                opcoes: ["Amagi", "Shindo", "Shinsuke", "Fei"],
+                respostas: '1',
+            },
+            {
+                perguntas: "Qual é a primeira habilidade que é utilizada no manga de super onze",
+                opcoes: ["Mão Fantasma", "Zona Mortal", "Furacão de Fogo", "Samba Mortal"],
+                respostas: '2',
+            },
+            {
+                perguntas: "Qual o nome da equipe que a raimon enfrenta na final do Super Onze clássico?",
+                opcoes: ["Shiratorizawa", "Konoha", "Instituo Imperial", "Brasil"],
+                respostas: '3',
+            },
+            {
+                perguntas: "Qual é o nome da técnica em que o goleiro executa um mortal no ar e cria uma barreira?",
+                opcoes: ["Bangi no chojo", "Atlantics Wall", "The WALL", "Fence of Gaia"],
+                respostas: '4',
+            },
+            {
+                perguntas: "Qual dessa habilidades abaixo é a Omega Hand",
+                opcoes: ["Salmão", "Bacalhau", "Tilápia", `Vai ficar uma imagem`],
+                respostas: '3',
+            },
+            {
+                perguntas: "Qual desses emblemas é da escola raimon",
+                opcoes: ["Barômetro", "Sonar", "Anemômetro", "GPS"],
+                respostas: '2',
+            },
+            {
+                perguntas: "O que é uma kenshin?",
+                opcoes: ["Um tipo de chute", "Um tipo de defesa", "Um tipo de drible", "Um tipo de incorporação"],
+                respostas: '1',
+            },
+            {
+                perguntas: "Qual dessas não é uma habilidade utilizada por Aphorid",
+                opcoes: ["Catastrofe", "Ceus divididos", "Tempo Celestial", "Asas Celestiais"],
+                respostas: '3',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '3',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            }
+        ];
+
+        var pontuacao = 0;
+        var perguntaAtual = 0;
+
+        function embaralharPerguntas() {
+            for (var index = perguntasQuiz.length - 1; index > 0; index--) {
+                var aleatorio = Math.floor(Math.random() * (index + 1));
+                var agora = perguntasQuiz[index];
+                perguntasQuiz[index] = perguntasQuiz[aleatorio];
+                perguntasQuiz[aleatorio] = agora;
+            }
+        }
+
+        function iniciar() {
+            embaralharPerguntas();
+            inicio.style.display = "none";
+            quiz.style.display = "block";
+            opcoes.style.display = 'block'
+            pergunta.style.display = 'block'
+
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            if (perguntaAtual < perguntasQuiz.length) {
+                pergunta.innerHTML = perguntasQuiz[perguntaAtual].perguntas;
+                opcao1.innerHTML = perguntasQuiz[perguntaAtual].opcoes[0];
+                opcao2.innerHTML = perguntasQuiz[perguntaAtual].opcoes[1];
+                opcao3.innerHTML = perguntasQuiz[perguntaAtual].opcoes[2];
+                opcao4.innerHTML = perguntasQuiz[perguntaAtual].opcoes[3];
+                resposta.innerHTML = '';
+                
+            } else {
+                finalizarQuiz();
+            }
+        }
+
+        function analisar(selected) {
+            var respostaCerta = perguntasQuiz[perguntaAtual].respostas;
+            if (selected == respostaCerta - 1) {
+                pontuacao++;
+                resposta.innerHTML = "SUA RESPOSTA ESTÁ CORRETA";
+            } else {
+                resposta.innerHTML = "SUA RESPOSTA ESTÁ ERRADA";
+            }
+            setTimeout(() => {
+                perguntaAtual++;
+                mostrarPergunta();
+            }, 1000);
+        }
+
+        function finalizarQuiz() {
+            finalizacao.innerHTML = "VOCE ACERTOU " + pontuacao + " DE " + perguntasQuiz.length + " QUESTÕES";
+            pergunta.style.display = "none";
+            opcoes.style.display = "none";
+            resposta.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

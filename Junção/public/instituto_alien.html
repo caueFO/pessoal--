@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/imagens/kisspng-inazuma-eleven-go-killua-zoldyck-emblem-logo-embraimon-2-inazuma-eleven-go-5b744e79076328.5285403015343489210303.png">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Jogos Inazuma</title>
+</head>
+<body onload="validarSessao()" background="assets/imagens/1920x1080.jpg">
+    <script src="js/menu.js"></script>
+    <div class="header-left">
+        <img src="assets/icon/Captura_de_tela_2024-06-06_132837-removebg-preview.png" alt="" width="40%">
+
+        <div class="hello">
+            <h1>Saudações</h1> <h2><span id="b_usuario">usuário</span>!</h2><br>
+        </div>
+
+        <div class="btn-nav">
+            <a href="jogos.html">
+                <h3>Lista de Jogos</h3>
+            </a>
+        </div>
+
+        <div class="btn-nav">
+            <a href="graficos.html">
+                <h3>Gráficos</h3>
+            </a>
+        </div>
+
+        <div class="btn-nav">
+            <a href="instituto_alien.html">
+                <h3>Sobre o Instituto Alien</h3>
+            </a>
+        </div>
+
+        <div class="btn-logout" onclick="limparSessao()">
+            <a href="index.html">
+                <h3>Sair</h3>
+                </a>
+                </div>
+                </div>
+                
+                </body>
+                </html>
+                <script>
+                var idUsuario;
+                
+window.onload = async function () {
+    validarSessao();
+    await carregarInfoUsuario();
+
+};
+
+
+let dadosUsuario = {};
+
+function obterDadosUsuario(email) {
+    return fetch(`/usuarios/listarInfo/${encodeURIComponent(email)}`, {
+        method: 'GET',
+    })
+        .then(resposta => {
+            if (!resposta.ok) {
+                throw new Error('Erro ao obter dados do usuário');
+            }
+            return resposta.json();
+        })
+        .catch(erro => {
+            console.error(`Erro ao obter dados do usuário: ${erro}`);
+            throw erro;
+        });
+}
+
+async function carregarInfoUsuario() {
+    const email = sessionStorage.EMAIL_USUARIO;
+
+    try {
+        let dados = JSON.parse(sessionStorage.getItem('dadosUsuario'));
+        console.log("Dados antes de verificar se estão vazios:", dados);
+
+        if (!dados) {
+            dados = await obterDadosUsuario(email);
+            console.log("Dados obtidos do usuário:", dados);
+            sessionStorage.setItem('dadosUsuario', JSON.stringify(dados));
+            console.log("Dados armazenados na sessionStorage:", JSON.parse(sessionStorage.getItem('dadosUsuario')));
+        }
+
+        if (dados) {
+            preencherInformacoesUsuario(dados[0]);
+        } else {
+            console.error("Dados do usuário não encontrados.");
+        }
+    } catch (error) {
+        console.error("Erro ao carregar informações do usuário:", error);
+    }
+}
+
+function preencherInformacoesUsuario(dados) {
+    idUsuario = dados.idUsuario;
+
+    document.querySelector(".hello").innerHTML = `
+        <h1>Saudações</h1> <h2><span>${dados.usuario}</span>!</h2><br>
+        <img id="personagem_img" src="${dados.imagem}" alt="Personagem" width="18%">
+    `;
+}
+
+function limparSessao() {
+    sessionStorage.removeItem('EMAIL_USUARIO');
+    sessionStorage.removeItem('dadosUsuario');
+}
+</script>

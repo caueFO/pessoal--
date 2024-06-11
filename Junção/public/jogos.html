@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/imagens/kisspng-inazuma-eleven-go-killua-zoldyck-emblem-logo-embraimon-2-inazuma-eleven-go-5b744e79076328.5285403015343489210303.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/sessao.js"></script>
+    <title>Jogos Inazuma</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body onload="validarSessao()" background="assets/imagens/1920x1080.jpg">
+    <div class="header-left">
+        <img src="assets/icon/Captura_de_tela_2024-06-06_132837-removebg-preview.png" alt="" width="40%">
+
+        <div class="hello">
+            <h1>Saudações</h1> 
+            <h2><span id="b_usuario">usuário</span>!</h2><br>
+        </div>
+        
+        <div class="btn-nav">
+            <a href="jogos.html">
+                <h3>Lista de Jogos</h3>
+            </a>
+        </div>
+
+        <div class="btn-nav">
+            <a href="graficos.html">
+                <h3>Gráficos</h3>
+            </a>
+        </div>
+
+        <div class="btn-nav">
+            <a href="instituto_alien.html">
+                <h3>Sobre o Instituto Alien</h3>
+            </a>
+        </div>
+
+        <div class="btn-logout" onclick="limparSessao()">
+            <a href="index.html">
+                <h3>Sair</h3>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="block-games" id="games-content">
+            <div class="memoriagame">
+                <div class="memoria">
+                    <img src="assets/imagens/2b341125f77c6e37bd04889f6862f5e3-removebg-preview.png" alt="">
+                    <img src="assets/imagens/brain.png" alt="">
+                </div>
+                <h1>JOGO DA MEMÓRIA </h1>
+                <button type="submit" class="login_button" id="jogamemo">JOGAR</button>
+            </div>
+
+            <div class="quiz">
+               <div class="quizima">
+                <img src="assets/imagens/2b341125f77c6e37bd04889f6862f5e3-removebg-preview.png" alt="">
+                <img src="assets/imagens/Component 5.png" alt="">
+                <h1>QUIZ</h1>
+                <button type="submit" class="login_button" id="jogar">JOGAR</button>
+               </div>
+            </div>
+        </div>
+        <div id="quiz-content" class="quiz-content">
+            <div id="quiz">
+                <div id="inicio">
+                    <h1>Perguntas Sobre Super Onze</h1>
+                    <button onclick="iniciar()">Iniciar Quiz</button>
+                    <div class="pontuacao" id="pontuacao"></div>
+                </div>
+                
+                <div>
+                    <div class="pergunta" id="pergunta" style="display: none;"></div>
+                    <div id="opcoes" class="opcoes" style="display: none;">
+                        <div class="opcoes1">
+                        <button class="opcoes" id="opcao1" onclick="analisar(0)"></button>
+                        <button class="opcoes" id="opcao2" onclick="analisar(1)"></button>
+                        </div>
+                        <div class="opcoes2">
+                        <button class="opcoes" id="opcao3" onclick="analisar(2)"></button>
+                        <button class="opcoes" id="opcao4" onclick="analisar(3)"></button>
+                        </div>
+                    </div>
+                </div>
+            <div class="finalizacao" id="finalizacao"></div>
+        <div id="resposta"></div>
+                <button id="voltarInicio" onclick="voltarInicio()" style="display: none;">Voltar para a Página Inicial</button>
+            </div>
+        </div>
+    </div>
+</body>
+    <script>
+        var perguntasQuiz = [
+            {
+                perguntas: `<img src="assets/fotosquiz/images (7).jpg" alt="" width="40%"><br>Quem é este personagem?`,
+                opcoes: ["hiroto", "Tsurugi", "Goenji", "Tenma"],
+                respostas: '2',
+            },
+            {
+                perguntas: `<img src="assets/fotosquiz/images (8).jpg" alt="" width="40%"><br>Quem é este personagem?`,
+                opcoes: ["Amagi", "Shindo", "Shinsuke", "Fei"],
+                respostas: '4',
+            },
+            {
+                perguntas: "Qual é a primeira habilidade que é utilizada no manga de super onze",
+                opcoes: ["Mão Fantasma", "Zona Mortal", "Furacão de Fogo", "Samba Mortal"],
+                respostas: '2',
+            },
+            {
+                perguntas: "Qual o nome da equipe que a raimon enfrenta na final do Super Onze clássico?",
+                opcoes: ["Shiratorizawa", "Konoha", "Instituo Imperial", "Brasil"],
+                respostas: '3',
+            },
+            {
+                perguntas: "Qual é o nome da técnica em que o goleiro executa um mortal no ar e cria uma barreira?",
+                opcoes: ["Bangi no chojo", "Atlantics Wall", "The WALL", "Fence of Gaia"],
+                respostas: '4',
+            },
+            {
+                perguntas: "Qual dessa habilidades abaixo é a Omega Hand",
+            opcoes: [`<img src="assets/fotosquiz/demoniaca.png" alt="" width="130px">`, ` <img src="assets/fotosquiz/fantasma.png" alt="" width="130px">`, `<img src="assets/fotosquiz/omega.png" alt="" width="130px">`, `    <img src="assets/fotosquiz/=god catc.png" alt="" width="130px">`],
+                respostas: '3',
+            },
+            {
+                perguntas: "Qual desses emblemas é da escola raimon",
+                opcoes: ["Barômetro", `<img src="assets/icon/favicon2.ico" width="50px">`, "Anemômetro", "GPS"],
+                respostas: '2',
+            },
+            {
+                perguntas: "O que é uma kenshin?",
+                opcoes: ["Um tipo de chute", "Um tipo de defesa", "Um tipo de drible", "Um tipo de incorporação"],
+                respostas: '1',
+            },
+            {
+                perguntas: "Qual dessas não é uma habilidade utilizada por Aphorid",
+                opcoes: ["Catastrofe", "Ceus divididos", "Tempo Celestial", "Asas Celestiais"],
+                respostas: '3',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '3',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas:  `<video autoplay="autoplay" muted loop="loop" controls src="assets/videos/Inazuma Eleven GO Strikers 2013 - Opening Cutscene.mp4"
+                type="video/mp4 controls" height="240px" width="200px"></video><br>Qual o nome do personagem que faz esse chute`,
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            },
+            {
+                perguntas: "Qual o nome do personagem que faz esse chute",
+                opcoes: ["Kazemaru", "Tsunami", "Asuto", "Tenma"],
+                respostas: '2',
+
+            }
+        ];
+
+        var pontuacao = 0;
+        var perguntaAtual = 0;
+        var startTime;
+        var tentativa = 0;
+
+        const tipoQuiz = 'Quiz';
+        const idUsuario = sessionStorage.ID_USUARIO;
+
+        function embaralharPerguntas() {
+            for (var index = perguntasQuiz.length - 1; index > 0; index--) {
+                var aleatorio = Math.floor(Math.random() * (index + 1));
+                var agora = perguntasQuiz[index];
+                perguntasQuiz[index] = perguntasQuiz[aleatorio];
+                perguntasQuiz[aleatorio] = agora;
+            }
+        }
+
+        function verificarTentativas() {
+    fetch(`/graficos/verificarTentativas/${idUsuario}/${tipoQuiz}`)
+        .then(resposta => {
+            if (!resposta.ok) {
+                throw new Error(`HTTP error! status: ${resposta.status}`);
+            }
+            return resposta.json();
+        })
+        .then(data => {
+            tentativa = data.tentativas;
+            iniciar();
+        })
+        .catch(error => {
+            console.error('Erro ao verificar tentativas:', error);
+        });
+}
+
+    
+    document.getElementById('jogar').addEventListener('click', function () {
+        verificarTentativas();
+    });
+
+        function iniciar() {
+            embaralharPerguntas();
+            document.getElementById("inicio").style.display = "none";
+            document.getElementById("quiz").style.display = "block";
+            document.getElementById("opcoes").style.display = 'block';
+            document.getElementById("pergunta").style.display = 'block';
+
+            startTime = new Date(); // Define o início do tempo aqui
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            if (perguntaAtual < perguntasQuiz.length) {
+                document.getElementById("pergunta").innerHTML = perguntasQuiz[perguntaAtual].perguntas;
+                document.getElementById("opcao1").innerHTML = perguntasQuiz[perguntaAtual].opcoes[0];
+                document.getElementById("opcao2").innerHTML = perguntasQuiz[perguntaAtual].opcoes[1];
+                document.getElementById("opcao3").innerHTML = perguntasQuiz[perguntaAtual].opcoes[2];
+                document.getElementById("opcao4").innerHTML = perguntasQuiz[perguntaAtual].opcoes[3];
+                document.getElementById("resposta").innerHTML = '';
+                
+            } else if (perguntaAtual == perguntasQuiz.length){
+                finalizarQuiz();
+            }
+        }
+
+        function analisar(selected) {
+            var respostaCerta = perguntasQuiz[perguntaAtual].respostas;
+            if (selected == respostaCerta - 1) {
+                pontuacao++;
+                document.getElementById("resposta").innerHTML = "SUA RESPOSTA ESTÁ CORRETA";
+            } else {
+                document.getElementById("resposta").innerHTML = "SUA RESPOSTA ESTÁ ERRADA";
+            }
+            document.getElementById('opcao1').disabled = true;
+        document.getElementById('opcao2').disabled = true;
+        document.getElementById('opcao3').disabled = true;
+        document.getElementById('opcao4').disabled = true;
+
+            setTimeout(() => {
+                perguntaAtual++;
+                mostrarPergunta();
+
+
+                document.getElementById('opcao1').disabled = false;
+            document.getElementById('opcao2').disabled = false;
+            document.getElementById('opcao3').disabled = false;
+            document.getElementById('opcao4').disabled = false;
+            }, 1000);
+        }
+
+        function finalizarQuiz() {
+            var endTime = new Date();
+            var totalTime = endTime - startTime;
+
+            var horas = Math.floor(totalTime / 3600000);
+            var minutos = Math.floor((totalTime % 3600000) / 60000);
+            var segundos = Math.floor((totalTime % 60000) / 1000);
+            var milissegundos = totalTime % 1000;
+
+            horas = String(horas).padStart(2, '0');
+            minutos = String(minutos).padStart(2, '0');
+            segundos = String(segundos).padStart(2, '0');
+            milissegundos = String(milissegundos).padStart(3, '0');
+
+            var tempoFormatado = `${horas}:${minutos}:${segundos}.${milissegundos}`;
+
+            document.getElementById("finalizacao").innerHTML = `VOCE ACERTOU ${pontuacao} DE ${perguntasQuiz.length} QUESTÕES, seu tempo foi de ${tempoFormatado}`;
+            document.getElementById("pergunta").style.display = "none";
+            document.getElementById("opcoes").style.display = "none";
+            document.getElementById("resposta").style.display = "none";
+            document.getElementById("voltarInicio").style.display = "block";
+
+            tentativa++
+
+            var dadosQuiz = {
+                idUsuario : idUsuario,
+                qtPontos : pontuacao,
+                tempo : tempoFormatado,
+                tipoQuiz : tipoQuiz,
+                tentativa: tentativa
+
+
+            }    
+
+            enviarDadosQuiz(dadosQuiz);
+
+        }
+
+        function enviarDadosQuiz(dadosQuiz) {
+        fetch('/graficos/registrarTentativa', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosQuiz)
+        })
+            .then(resposta => {
+                if (!resposta.ok) {
+                    throw new Error('Erro ao enviar dados do quiz para o servidor');
+                }
+                console.log('Dados do quiz enviados com sucesso');
+            })
+            .catch(error => {
+                console.error('Erro ao enviar dados do quiz para o servidor:', error);
+            });
+    }
+
+        function voltarInicio() {
+            window.location.href = 'jogos.html';
+        }
+
+        document.getElementById('jogar').addEventListener('click', function() {
+            document.getElementById('games-content').style.display = 'none';
+            document.getElementById('quiz-content').style.display = 'block';
+        });
+
+        document.getElementById('jogamemo').addEventListener('click', function() {
+            window.location.href = 'jogo da memoria.html';
+        });
+
+    
+
+        
+window.onload = async function () {
+            validarSessao();
+            await carregarInfoUsuario();
+        };
+
+        let dadosUsuario = {};
+
+        function obterDadosUsuario(email) {
+            return fetch(`/usuarios/listarInfo/${encodeURIComponent(email)}`, {
+                method: 'GET',
+            })
+            .then(resposta => {
+                if (!resposta.ok) {
+                    throw new Error('Erro ao obter dados do usuário');
+                }
+                return resposta.json();
+            })
+            .catch(erro => {
+                console.error(`Erro ao obter dados do usuário: ${erro}`);
+                throw erro;
+            });
+        }
+
+        async function carregarInfoUsuario() {
+            var email = sessionStorage.EMAIL_USUARIO;
+
+            try {
+                let dados = JSON.parse(sessionStorage.getItem('dadosUsuario'));
+                console.log("Dados antes de verificar se estão vazios:", dados);
+
+                if (!dados) {
+                    dados = await obterDadosUsuario(email);
+                    console.log("Dados obtidos do usuário:", dados);
+                    sessionStorage.setItem('dadosUsuario', JSON.stringify(dados));
+                    console.log("Dados armazenados na sessionStorage:", JSON.parse(sessionStorage.getItem('dadosUsuario')));
+                }
+
+                if (dados) {
+                    preencherInformacoesUsuario(dados[0]);
+                } else {
+                    console.error("Dados do usuário não encontrados.");
+                }
+            } catch (error) {
+                console.error("Erro ao carregar informações do usuário:", error);
+            }
+        }
+
+        function preencherInformacoesUsuario(dados) {
+            const idUsuario = dados.idUsuario;
+
+            // Log para verificar o valor da imagem
+            console.log("URL da imagem do usuário:", dados.imagem);
+
+            document.querySelector(".hello").innerHTML = `
+                <h1>Saudações</h1> <h2><span>${dados.usuario}</span>!</h2><br>
+                <img id="personagem_img" src="${dados.imagem}" alt="Personagem" width="18%">
+            `;
+        }
+
+        function limparSessao() {
+    sessionStorage.removeItem('EMAIL_USUARIO');
+    sessionStorage.removeItem('dadosUsuario');
+}
+        
+    </script>
+</html>

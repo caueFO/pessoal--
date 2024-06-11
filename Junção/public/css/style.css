@@ -5,6 +5,7 @@ font-family: sans-serif;
 background-color: #78B5E1;
 background-attachment: fixed;
 box-sizing: border-box;
+overflow-x: hidden;
 }
 html{
     height: 500vh;
@@ -67,20 +68,13 @@ margin-left: auto;
     content: url(imagens/15144975-de-contorno-de-cor-de-icone-de-simbolo-de-raio-vetor-removebg-preview.png) ;
     position: absolute;
     opacity: 0;
-    transition: opacity 0.7s ;
+    transition: opacity 0.4s ;
 
 }
 .navbar a:hover::after {
     opacity: 1;
 }
 
-
-
-.agora{
-    font-weight: 1000;
-    color: rgba(234, 255, 0, 0.966);
-    
-}
 
 
 
@@ -364,6 +358,7 @@ z-index: 0;
        margin-top: 100px;
        margin-left: 50px;
        perspective: 100px;
+       position: relative;
     }
    
     .perso1 img{
@@ -375,6 +370,24 @@ z-index: 0;
        z-index: 0;
    }
    
+.texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; 
+
+}
+   .perso1:hover .texto{
+    opacity: 1;
+   }
 
 
 
@@ -438,6 +451,7 @@ animation: scroll 150s linear infinite reverse;
     width: 800px;
     height: 489px;
     position: relative;
+   
 }
 
 .slides {
@@ -453,13 +467,31 @@ animation: scroll 150s linear infinite reverse;
 
 .slide {
     width: 800px; 
+    height: 489px;
+    margin-right: 40px;
     flex-shrink: 0;
-    transition: 3s;
+    transition: 1.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slide img {
-    width: 100%;
+    width: 101%;
     height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s;
+}
+
+
+.slide:hover img {
+    transform: scale(1.1);
+    transition: 1.5s;
+}
+
+
+.slide:hover ~ .slides {
+    pointer-events: none;
 }
 
 .manual-navigation {
@@ -489,25 +521,33 @@ animation: scroll 150s linear infinite reverse;
     margin-left: 0;
 }
 #radio2:checked ~ .first {
-    margin-left: -800px;
+    margin-left: -840px;
 }
 #radio3:checked ~ .first {
-    margin-left: -1600px;
+    margin-left: -1680px;
 }
 #radio4:checked ~ .first {
-    margin-left: -2400px;
+    margin-left: -2520px;
 }
 #radio5:checked ~ .first {
-    margin-left: -3200px;
+    margin-left: -3360px;
 }
 #radio6:checked ~ .first {
-    margin-left: -4000px;
+    margin-left: -4200px;
 }
 #radio7:checked ~ .first {
-    margin-left: -4800px;
+    margin-left: -5040px;
 }
 
-.navigation-auto div{
+.navigation-auto {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.navigation-auto div {
     border: 3px solid yellow;
     padding: 5px;
     border-radius: 10px;
@@ -515,15 +555,7 @@ animation: scroll 150s linear infinite reverse;
     transition: 1s;
 }
 
-.navigation-auto{
-    position: absolute;
-    width: calc(800px * 7);
-    margin-top: 360px;
-    display: flex;
-    justify-content: center;
-}
-
-.navigation-auto div:not(:last-child){
+.navigation-auto div:not(:last-child) {
     margin-right: 40px;
 }
 
@@ -547,4 +579,211 @@ animation: scroll 150s linear infinite reverse;
 }
 #radio7:checked ~ .navigation-auto .auto-btn7 {
     background-color: white;
+}
+
+.informativo{
+    height: 750px;
+    display: flex;
+    align-items: center;
+}
+
+/*jogos*/
+.header-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100vh;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-right: 8px solid #3a0ca3;
+    background-color: #5a189a;
+    padding: 20px;
+}
+
+
+.hello{
+  
+    text-align: center;
+}
+
+.hello h1 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    color: #ffcc00;
+}
+
+.hello  h2 {
+    font-size: 24px;
+    color: #38A48C;
+    
+}
+
+.btn-nav, .btn-logout {
+    margin-top: 1%;
+    width: 70%;
+    color: white;
+    background-color: #3a0ca3;
+    border-radius: 50px;
+    border: solid 3px #38A48C;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-nav:hover, .btn-logout:hover {
+    transform: scale(1.1);
+    background-color: #EB7E39;
+}
+
+.btn-nav a, .btn-logout a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.btn-nav a h3, .btn-logout a h3 {
+    margin: 0;
+}
+ /* jogos */
+
+ @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+ .block-games {
+     display: flex;
+     font-family: 'Press Start 2P', cursive;
+     gap: 30px; /* Espaçamento entre os jogos */
+     flex-wrap: wrap;
+ }
+ 
+ .main-content {
+     margin-left: 26%;
+     padding: 50px;
+     width: 60%;
+ }
+ 
+ .memoriagame, .quiz {
+     flex: 1;
+     max-width: 500px; /* Largura mínima dos jogos */
+     max-height: 599px;
+     background-color: #5a189a;
+     color: white;
+     padding: 30px;
+     text-align: center;
+     border-radius: 10px;
+     font-family: 'Press Start 2P', cursive;
+ }
+ 
+ .memoriagame {
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+     justify-content: center;
+     margin-left: 50px;
+ }
+ 
+ .memoria img {
+     width: 200px;
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .memoriagame h1 {
+     width: 100%;
+     margin-top: 150px;
+     font-family: 'Press Start 2P', cursive;
+ }
+ 
+ .login_button {
+     background-color: #9224ff;
+     border-radius: 16px;
+     font-family: 'Press Start 2P', cursive;
+     color: white;
+     font-size: 1em;
+     width: 45%;
+     height: 40px;
+     cursor: pointer;
+     transition: transform 1s ease-in-out, background-color 1s ease-in-out;
+ }
+ 
+ .login_button:hover {
+     background-color: #c5c526;
+     color: black;
+     transform: scale(1.1);
+ }
+ 
+ .quizima {
+     align-items: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+ }
+
+ .memoria {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+ 
+ .quizima img {
+     width: 70%;
+     margin-bottom: 5px;
+ }
+
+.main-content {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.quiz-content {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 70px;
+}
+.quiz-content h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.quiz-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    columns: 2;
+    padding: 10px 20px;
+    margin-left: 7px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.quiz-content button:hover {
+    background-color: #0056b3;
+}
+.quiz-content .opcoes button {
+    display: block;
+    margin: 10px auto;
+    height: 50px;
+}
+.quiz-content .pontuacao, .quiz-content .finalizacao, .quiz-content #resposta {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.opcoes{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
 }
