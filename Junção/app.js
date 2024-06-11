@@ -18,7 +18,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
-// var hissatsuRouter = require("./src/routes/hissatsu");
+var graficosRouter = require("./src/routes/graficos");
 var personagemRouter = require("./src/routes/personagens");
 
 app.use(express.json());
@@ -30,7 +30,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
-// app.use("/hissatsu", hissatsuRouter);
+app.use("/graficos", graficosRouter);
 app.use("/personagens", personagemRouter);
 
 app.listen(PORTA_APP, function () {

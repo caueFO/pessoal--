@@ -1,59 +1,54 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+create database inazuma;
 
-/*
-comandos para mysql server
-*/
+use inazuma;
 
-CREATE DATABASE aquatech;
+create table personagem (
+idPersonagem int primary key auto_increment,
+nome varchar(50),
+times varchar(50));
 
-USE aquatech;
+insert into personagem values 
+(default, 'Mamoru Endo', 'Raimon'),
+(default, 'Shuji Goenji', 'Raimon'),
+(default, 'Matsukaze Tenma', 'Raimon'),
+(default, 'Kyosuke Tsurugi', 'Raimon'),
+(default, 'Inamori Asuto', 'Raimon'),
+(default, 'Goujin Tetsunosuki', 'Raimon'),
+(8, 'Jousuke Tsunami', 'Raimon');
 
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14)
-);
+select * from personagem;
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+create table imagens (
+idImagens int primary key auto_increment,
+imagem varchar(100),
+fkPersonagem int,
+constraint foreign key (fkPersonagem) references personagem(idPersonagem));
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
-);
+insert into imagens value 
+(default, 'assets/imagens/endou perfil.png', 1),
+(default, 'assets/imagens/Matsukaze perfil.png', 3),
+(default, 'assets/imagens/Tsurugi perfil.png', 4),
+(default, 'assets/imagens/GOenji perfil.png', 2),
+(default, 'assets/imagens/Asuto perfil.png', 5),
+(default, 'assets/imagens/Goujin perfil.png', 6),
+(default, 'assets/imagens/Tsunami perfil.png', 8);
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+create table usuario (
+idUsuario int primary key auto_increment,
+nome varchar(100),
+usuario varchar (45),
+email varchar(100),
+senha varchar(70),
+fkPersonagem int,
+constraint foreign key (fkPersonagem) references personagem (idPersonagem));
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+select * from usuario;
 
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
-);
+create table quiz (
+idQuiz int primary key auto_increment,
+qtPontos int,
+tempo time(3),
+tipoQuiz varchar(45),
+fkUsuario int,
+constraint foreign key (fkUsuario) references usuario (idUsuario));
 
-insert into empresa (razao_social, cnpj) values ('Empresa 1', '00000000000000');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
